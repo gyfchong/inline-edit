@@ -69,8 +69,6 @@ class EditableInfo extends Component {
 
     editCallback(true);
 
-    onSave(defaultText);
-
     this.setState({
         inEditMode: false,
         localText: defaultText,
