@@ -13,7 +13,7 @@ class EditableInfo extends Component {
     super(props);
 
     this.state = {
-      inEditMode: false,
+      isReadOnlyMode: true,
       defaultText: props.text, // Store the incoming text prop
       localText: props.text, // Set the field text
     }
@@ -24,14 +24,10 @@ class EditableInfo extends Component {
         editCallback,
     } = this.props;
 
-    const {
-        localText,
-    } = this.state;
-
     editCallback(true);
 
     this.setState({
-        inEditMode: true,
+        isReadOnlyMode: false,
     });
   }
 
@@ -57,11 +53,9 @@ class EditableInfo extends Component {
   handleCancel = () => {
     const {
         editCallback,
-        onSave,
     } = this.props;
 
     const {
-        inEditMode,
         defaultText
     } = this.state;
 
@@ -70,7 +64,7 @@ class EditableInfo extends Component {
     editCallback(true);
 
     this.setState({
-        inEditMode: false,
+        isReadOnlyMode: true,
         localText: defaultText,
     });
   }
@@ -88,7 +82,7 @@ class EditableInfo extends Component {
     console.log('on submit ' + localText);
 
     this.setState({
-        inEditMode: false,
+        isReadOnlyMode: true,
         defaultText: localText,
     });
 
@@ -100,7 +94,7 @@ class EditableInfo extends Component {
     return (
       <div>
         {
-          !this.state.inEditMode ?
+          this.state.isReadOnlyMode ?
           <div onClick={this.handleClick}>{this.state.localText}</div> :
           <EditField value={this.state.localText} handleSubmit={this.handleSubmit} handleCancel={this.handleCancel} handleChange={this.handleChange} />
         }
