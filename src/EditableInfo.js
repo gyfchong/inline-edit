@@ -14,8 +14,8 @@ class EditableInfo extends Component {
 
     this.state = {
       inEditMode: false,
-      defaultText: props.text,
-      localText: props.text,
+      defaultText: props.text, // Store the incoming text prop
+      localText: props.text, // Set the field text
     }
   }
 
@@ -91,6 +91,7 @@ class EditableInfo extends Component {
 
     this.setState({
         inEditMode: false,
+        defaultText: localText,
     });
 
     editCallback(true);
